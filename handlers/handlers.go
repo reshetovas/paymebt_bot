@@ -1,13 +1,9 @@
 package handlers
 
 import (
-	"payment_bot/models"
-	"payment_bot/services"
-	"strconv"
-	"strings"
-	"time"
-
 	"gopkg.in/telebot.v3"
+	"payment_bot/services"
+	"strings"
 )
 
 type PaymentHandler struct {
@@ -27,60 +23,72 @@ func (h *PaymentHandler) HandleAddPayment(c telebot.Context) error {
 	if err := h.service.StartPaymentCreation(userID); err != nil {
 		return c.Send("Ошибка при создании платежа")
 	}
-	return c.Send("Укажи категорию:")
+	markup := h.service.GetMarkups()
+	return c.Send("Выбери категорию:", markup)
+}
+
+func (h *PaymentHandler) HandleCategorySelection(c telebot.Context) error {
+	userID := c.Sender().ID
+	payload := strings.TrimPrefix(c.Callback().Data, "category:")
+
+	err := h.service.ProcessCategoryInput(userID, payload)
+	if err != nil {
+		return c.Respond(&telebot.CallbackResponse{Text: "Ошибка записи категории"})
+	}
+
+	err = c.Respond() // Удалим крутилку
+	if err != nil {
+		return err
+	}
+
+	return c.Send("Введи сумму:")
+}
+
+func (h *PaymentHandler) HandleReportSelection(c telebot.Context) error {
+	userID := c.Sender().ID
+	payload := strings.TrimPrefix(c.Callback().Data, "category:")
+
+	switch payload {
+	case "report_today":
+		report, err := h.service.GenerateCategoryReportToday(userID)
+		if err != nil {
+			return c.Send("Ошибка при генерации отчета.")
+		}
+		return c.Send(report)
+	case "report_month":
+		report, err := h.service.GenerateCategoryReportMonth(userID)
+		if err != nil {
+			return c.Send("Ошибка при генерации отчета.")
+		}
+		return c.Send(report)
+	case "report_custom":
+		userID := c.Sender().ID
+		if err := h.service.StartCustomReportCreation(userID); err != nil {
+			return c.Send("Ошибка при создании отчета")
+		}
+		return c.Send("Введи период в формате ГГГГ-ММ-ДД - ГГГГ-ММ-ДД")
+	default:
+		return nil
+	}
 }
 
 func (h *PaymentHandler) HandleReport(c telebot.Context) error {
-	return c.Send("Формат: /report месяц|год\nПример: /report январь")
+	markup := h.service.GetMarkupsReport()
+	return c.Send("Выберите период отчета:", markup)
 }
 
 func (h *PaymentHandler) HandleExport(c telebot.Context) error {
-	return c.Send("Формат: /export 2024-01-01 2024-03-31 [категория]")
+	userID := c.Sender().ID
+	if err := h.service.StartExportPayments(userID); err != nil {
+		return c.Send("%s", err)
+	}
+	return c.Send("Введи период в формате ГГГГ-ММ-ДД - ГГГГ-ММ-ДД")
 }
 
 func (h *PaymentHandler) HandleTextInput(c telebot.Context) error {
 	userID := c.Sender().ID
 	text := strings.TrimSpace(c.Text())
 
-	state, err := h.service.GetUserState(userID)
-	if err != nil {
-		return c.Send("Ошибка при обработке запроса")
-	}
-
-	switch state {
-	case models.AwaitingCategory:
-		if err := h.service.ProcessCategoryInput(userID, text); err != nil {
-			return c.Send("Ошибка при сохранении категории")
-		}
-		return c.Send("Введи сумму:")
-
-	case models.AwaitingAmount:
-		amount, err := strconv.ParseFloat(text, 64)
-		if err != nil {
-			return c.Send("Неверная сумма.")
-		}
-		if err := h.service.ProcessAmountInput(userID, amount); err != nil {
-			return c.Send("Ошибка при сохранении суммы")
-		}
-		return c.Send("Укажи дату (ГГГГ-ММ-ДД) или 'сегодня':")
-
-	case models.AwaitingDate:
-		var dt time.Time
-		if text == "сегодня" {
-			dt = time.Now()
-		} else {
-			dt, err = time.Parse("2006-01-02", text)
-			if err != nil {
-				return c.Send("Неверная дата.")
-			}
-		}
-
-		if err := h.service.ProcessDateInput(userID, dt); err != nil {
-			return c.Send("Не удалось записать дать")
-		}
-		return c.Send("Укажи дату (ГГГГ-ММ-ДД) или 'сегодня':")
-	default:
-		// Обработка команд /report и /export...
-		return nil
-	}
+	result := h.service.StateMachine(userID, text)
+	return c.Send(result)
 }

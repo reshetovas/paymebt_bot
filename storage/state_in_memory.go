@@ -26,6 +26,7 @@ type StateStorage interface {
 	UploadUserState(userId int64, state models.State) error
 	DeleteUserState(userId int64) error
 	GetUserContext(userId int64) (*models.Payment, error)
+	InitUserContext(userId int64, updateFunc func(*models.Payment)) error
 	UploadUserContext(userId int64, updateFunc func(*models.Payment)) error
 	DeleteUserContext(userId int64) error
 }
@@ -81,6 +82,16 @@ func (s *InMemeoryStateStorage) GetUserContext(userId int64) (*models.Payment, e
 	return &paymentCopy, nil
 }
 
+func (s *InMemeoryStateStorage) InitUserContext(userId int64, updateFunc func(*models.Payment)) error {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+
+	payment := &models.Payment{}
+	s.UserContext[userId] = payment
+	updateFunc(payment)
+	return nil
+}
+
 func (s *InMemeoryStateStorage) UploadUserContext(userId int64, updateFunc func(*models.Payment)) error {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
@@ -100,7 +111,7 @@ func (s *InMemeoryStateStorage) DeleteUserContext(userId int64) error {
 	defer s.mutex.Unlock()
 
 	delete(s.UserContext, userId)
-	if s.UserStates[userId] != "" {
+	if s.UserContext[userId] != nil {
 		log.Error().Msgf("faild to delete entry userID: %d", userId)
 		return fmt.Errorf("faild to delete entry userID: %d", userId)
 	}

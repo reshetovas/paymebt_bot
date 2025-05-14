@@ -1,0 +1,89 @@
+{"level":"fatal","service":"payment-service","error":"sql: unknown driver \"sqlite3\" (forgotten import?)","time":"2025-05-10T00:34:16+03:00","message":"Error connecting to DB sql.Open"}
+{"level":"fatal","service":"payment-service","error":"sql: unknown driver \"sqlite3\" (forgotten import?)","time":"2025-05-10T00:38:22+03:00","message":"Error connecting to DB sql.Open"}
+{"level":"fatal","service":"payment-service","error":"sql: unknown driver \"sqlite3\" (forgotten import?)","time":"2025-05-10T00:42:54+03:00","message":"Error connecting to DB sql.Open"}
+{"level":"error","service":"payment-service","time":"2025-05-11T22:38:15+03:00","message":"token not identified"}
+{"level":"error","service":"payment-service","time":"2025-05-11T22:44:37+03:00","message":"token not identified"}
+{"level":"error","service":"payment-service","time":"2025-05-11T22:44:37+03:00","message":"token not identified"}
+{"level":"error","service":"payment-service","time":"2025-05-11T22:47:53+03:00","message":"token not identified"}
+{"level":"info","service":"payment-service","time":"2025-05-11T22:47:53+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-11T22:48:54+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-11T22:49:12+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:02:32+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:03:46+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:03:46+03:00","message":"payment <nil> not found"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:04:12+03:00","message":"payment <nil> not found"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:10:18+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:10:23+03:00","message":"payment <nil> not found"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:27:38+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:27:55+03:00","message":"payment <nil> not found"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:30:26+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:31:03+03:00","message":"faild to delete entry userID: 297987754"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:38:55+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-11T23:39:29+03:00","message":"payment <nil> not found"}
+{"level":"info","service":"payment-service","time":"2025-05-11T23:46:13+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-12T22:50:27+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-12T22:52:27+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-12T23:35:13+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:36:40+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-13T00:36:57+03:00","message":"user 297987754 state not found"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:38:50+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:43:22+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"not enough args to execute query: want 6 got 3","time":"2025-05-13T00:43:29+03:00","message":"Error executing query"}
+{"level":"error","service":"payment-service","error":"not enough args to execute query: want 6 got 3","time":"2025-05-13T00:44:06+03:00","message":"Error executing query"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:44:14+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"sql: Scan error on column index 0, name \"category\": converting driver.Value type string (\"Всего\") to a uint: invalid syntax","time":"2025-05-13T00:44:17+03:00","message":"Error scanning row"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:45:31+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"near \"as\": syntax error","time":"2025-05-13T00:45:33+03:00","message":"Error executing query"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:47:07+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"near \"as\": syntax error","time":"2025-05-13T00:47:08+03:00","message":"Error executing query"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:49:36+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"sql: Scan error on column index 0, name \"category\": converting driver.Value type string (\"Всего\") to a uint: invalid syntax","time":"2025-05-13T00:49:39+03:00","message":"Error scanning row"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:51:01+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"sql: Scan error on column index 1, name \"amount\": converting NULL to string is unsupported","time":"2025-05-13T00:51:04+03:00","message":"Error scanning row"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:52:00+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"sql: Scan error on column index 1, name \"amount\": converting NULL to float64 is unsupported","time":"2025-05-13T00:52:02+03:00","message":"Error scanning row"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:53:27+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-13T00:55:10+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T19:22:18+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T19:38:55+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T19:39:36+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T19:42:58+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T19:48:39+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:01:52+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:02:28+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:02:59+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:18:31+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-14T20:19:01+03:00","message":"Некоректный формат дат, ожидается ГГГГ-ММ-ДД - ГГГГ-ММ-ДД"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:22:10+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-14T20:22:17+03:00","message":"user 297987754 state not found"}
+{"level":"error","service":"payment-service","time":"2025-05-14T20:22:42+03:00","message":"Некорректный формат дат, ожидается ГГГГ-ММ-ДД - ГГГГ-ММ-ДД"}
+{"level":"error","service":"payment-service","time":"2025-05-14T20:22:42+03:00","message":"INPUT: type: string, value: 2024-01-01 - 2025-05-15\n Len parts 2"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:23:55+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:51:58+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T20:53:29+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-14T20:53:51+03:00","message":"user 297987754 state not found"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:14:32+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:19:12+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"sql: Scan error on column index 4, name \"date\": unsupported Scan, storing driver.Value type string into type *time.Time","time":"2025-05-14T21:19:26+03:00","message":"Error getting payments by period"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:32:05+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:34:32+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"parsing time \"2024-05-11 00:00:00+00:00\": extra text: \" 00:00:00+00:00\"","time":"2025-05-14T21:34:57+03:00","message":"Error getting payments by period"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:37:32+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-14T21:41:24+03:00","message":"Некорректный формат дат, ожидается ГГГГ-ММ-ДД - ГГГГ-ММ-ДД"}
+{"level":"debug","service":"payment-service","time":"2025-05-14T21:41:24+03:00","message":"INPUT: type: string, value: 2025-05-14\n Len parts 3"}
+{"level":"error","service":"payment-service","time":"2025-05-14T21:41:40+03:00","message":"No payments found by period: 2025-05-13 - 2025-05-14"}
+{"level":"error","service":"payment-service","time":"2025-05-14T21:46:37+03:00","message":"user 423795271 state not found"}
+{"level":"error","service":"payment-service","time":"2025-05-14T21:47:04+03:00","message":"user 423795271 state not found"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:48:49+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","error":"near \"GROUP\": syntax error","time":"2025-05-14T21:49:20+03:00","message":"Error executing query"}
+{"level":"info","service":"payment-service","time":"2025-05-14T21:50:02+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:02:50+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:16:48+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:17:40+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:18:54+03:00","message":"The telegram bot is running"}
+{"level":"debug","service":"payment-service","time":"2025-05-14T22:18:57+03:00","message":"from: 2025-05-14 22:18:57.061522 +0300 MSK m=+2.736443960, to: 2025-05-01 00:00:00 +0000 UTC"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:20:44+03:00","message":"The telegram bot is running"}
+{"level":"debug","service":"payment-service","time":"2025-05-14T22:20:47+03:00","message":"from: 2025-05-01 00:00:00 +0000 UTC, to: 2025-05-14 23:59:59 +0000 UTC"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:26:00+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-14T22:31:00+03:00","message":"The telegram bot is running"}
+{"level":"error","service":"payment-service","time":"2025-05-14T22:32:05+03:00","message":"user 423795271 state not found"}

@@ -1,23 +1,39 @@
-package services
+package state_machine
 
 import (
 	"fmt"
 	"payment_bot/models"
+	"payment_bot/services"
+	"payment_bot/utils"
 	"strconv"
 	"strings"
 	"time"
 )
 
-func (s *PaymentService) StateMachine(userID int64, text string) string {
+type StateMachine struct {
+	paymentService *services.PaymentService
+	reportService  *services.ReportService
+	exportService  *services.ExportService
+}
 
-	state, err := s.GetUserState(userID)
+func NewStateMachine(paymentService *services.PaymentService, reportService *services.ReportService, exportService *services.ExportService) *StateMachine {
+	return &StateMachine{
+		paymentService: paymentService,
+		reportService:  reportService,
+		exportService:  exportService,
+	}
+}
+
+func (s *StateMachine) StateMachine(userID int64, text string) string {
+
+	state, err := s.paymentService.GetUserState(userID)
 	if err != nil {
 		return "Ошибка при обработке запроса"
 	}
 
 	switch state {
 	case models.AwaitingCategory:
-		if err := s.ProcessCategoryInput(userID, text); err != nil {
+		if err := s.paymentService.ProcessCategoryInput(userID, text); err != nil {
 			return "Ошибка при сохранении категории"
 		}
 		return "Введи сумму:"
@@ -27,7 +43,7 @@ func (s *PaymentService) StateMachine(userID int64, text string) string {
 		if err != nil {
 			return "Неверная сумма."
 		}
-		if err := s.ProcessAmountInput(userID, amount); err != nil {
+		if err := s.paymentService.ProcessAmountInput(userID, amount); err != nil {
 			return "Ошибка при сохранении суммы"
 		}
 		return "Укажи дату (ГГГГ-ММ-ДД) или 'сегодня':"
@@ -43,28 +59,28 @@ func (s *PaymentService) StateMachine(userID int64, text string) string {
 			}
 		}
 
-		payment, err := s.ProcessDateInput(userID, dt)
+		payment, err := s.paymentService.ProcessDateInput(userID, dt)
 		if err != nil {
 			return "Не удалось записать дать"
 		}
 		return fmt.Sprintf("✅ Добавлен платёж: %s, %.2f ₽, %s",
 			payment.Category, payment.Amount, payment.Date.Format("02 Jan 2006"))
 	case models.AwaitingCustomReport:
-		from, to, err := s.ParseCustomReportDates(text)
+		from, to, err := utils.ParseCustomReportDates(text)
 		if err != nil {
 			return fmt.Sprintf("%s", err)
 		}
-		report, err := s.GenerateCategoryReport(userID, from, to)
+		report, err := s.reportService.GenerateCategoryReport(userID, from, to)
 		if err != nil {
 			return fmt.Sprintf("Ошибка при генерации отчёта")
 		}
 		return fmt.Sprintf(report)
 	case models.AwaitingExport:
-		from, to, err := s.ParseCustomReportDates(text)
+		from, to, err := utils.ParseCustomReportDates(text)
 		if err != nil {
 			return fmt.Sprintf("%s", err)
 		}
-		report, err := s.ExportPayments(userID, from, to)
+		report, err := s.exportService.ExportPayments(userID, from, to)
 		if err != nil {
 			return fmt.Sprintf("Ошибка при выгрузке платежей")
 		}

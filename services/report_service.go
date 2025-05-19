@@ -5,11 +5,24 @@ import (
 	"github.com/rs/zerolog/log"
 	"gopkg.in/telebot.v3"
 	"payment_bot/models"
+	"payment_bot/storage"
 	"strings"
 	"time"
 )
 
-func (s *PaymentService) GetMarkupsReport() *telebot.ReplyMarkup {
+type ReportService struct {
+	state   storage.StateStorage
+	storage storage.PaymentStorage
+}
+
+func NewReportService(state storage.StateStorage, storage storage.PaymentStorage) *ReportService {
+	return &ReportService{
+		state:   state,
+		storage: storage,
+	}
+}
+
+func (s *ReportService) GetMarkupsReport() *telebot.ReplyMarkup {
 	todayBtn := telebot.InlineButton{
 		Data: "report_today",
 		Text: "За сегодня",
@@ -33,7 +46,7 @@ func (s *PaymentService) GetMarkupsReport() *telebot.ReplyMarkup {
 	return markup
 }
 
-func (s *PaymentService) StartCustomReportCreation(userID int64) error {
+func (s *ReportService) StartCustomReportCreation(userID int64) error {
 	if err := s.state.UploadUserState(userID, models.AwaitingCustomReport); err != nil {
 		log.Error().Err(err).Msg("Error uploading user state")
 		return err
@@ -41,7 +54,7 @@ func (s *PaymentService) StartCustomReportCreation(userID int64) error {
 	return nil
 }
 
-func (s *PaymentService) GenerateCategoryReportToday(userID int64) (string, error) {
+func (s *ReportService) GenerateCategoryReportToday(userID int64) (string, error) {
 	now := time.Now()
 	from := time.Date(now.Year(), now.Month(), now.Day(), 1, 0, 0, 0, time.UTC)
 	to := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, time.UTC)
@@ -65,7 +78,7 @@ func (s *PaymentService) GenerateCategoryReportToday(userID int64) (string, erro
 	return sb.String(), nil
 }
 
-func (s *PaymentService) GenerateCategoryReportMonth(userID int64) (string, error) {
+func (s *ReportService) GenerateCategoryReportMonth(userID int64) (string, error) {
 	now := time.Now()
 	from := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, time.UTC)
 	to := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, time.UTC)
@@ -91,7 +104,7 @@ func (s *PaymentService) GenerateCategoryReportMonth(userID int64) (string, erro
 	return sb.String(), nil
 }
 
-func (s *PaymentService) GenerateCategoryReport(userID int64, from, to time.Time) (string, error) {
+func (s *ReportService) GenerateCategoryReport(userID int64, from, to time.Time) (string, error) {
 	from = time.Date(from.Year(), from.Month(), from.Day(), 0, 0, 0, 0, time.UTC)
 	to = time.Date(to.Year(), to.Month(), to.Day(), 23, 59, 59, 0, time.UTC)
 	records, err := s.storage.GetCountByCategory(userID, from, to)

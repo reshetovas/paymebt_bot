@@ -105,7 +105,3 @@ func (s *PaymentService) ProcessDateInput(userID int64, date time.Time) (*models
 	}
 	return payment, nil
 }
-
-// func (s *PaymentService) GenerateReport(period string) (string, error) {
-// 	// Логика формирования отчета
-// }

@@ -4,11 +4,24 @@ import (
 	"fmt"
 	"github.com/rs/zerolog/log"
 	"payment_bot/models"
+	"payment_bot/storage"
 	"strings"
 	"time"
 )
 
-func (s *PaymentService) StartExportPayments(userID int64) error {
+type ExportService struct {
+	state   storage.StateStorage
+	storage storage.PaymentStorage
+}
+
+func NewExportService(state storage.StateStorage, storage storage.PaymentStorage) *ExportService {
+	return &ExportService{
+		state:   state,
+		storage: storage,
+	}
+}
+
+func (s *ExportService) StartExportPayments(userID int64) error {
 	if err := s.state.UploadUserState(userID, models.AwaitingExport); err != nil {
 		log.Error().Err(err).Msg("Error uploading user state")
 		return err
@@ -16,10 +29,10 @@ func (s *PaymentService) StartExportPayments(userID int64) error {
 	return nil
 }
 
-func (s *PaymentService) ExportPayments(userID int64, from, to time.Time) (string, error) {
+func (s *ExportService) ExportPayments(userID int64, from, to time.Time) (string, error) {
 	from = time.Date(from.Year(), from.Month(), from.Day(), 0, 0, 0, 0, time.UTC)
 	to = time.Date(to.Year(), to.Month(), to.Day(), 23, 59, 59, 0, time.UTC)
-	
+
 	records, err := s.storage.GetPaymentsByPeriod(userID, from, to)
 	if err != nil {
 		log.Error().Err(err).Msg("Error getting payments by period")

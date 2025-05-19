@@ -1,4 +1,4 @@
-package services
+package utils
 
 import (
 	"errors"
@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func (s *PaymentService) ParseCustomReportDates(input string) (time.Time, time.Time, error) {
+func ParseCustomReportDates(input string) (time.Time, time.Time, error) {
 	parts := strings.Split(input, "-")
 	if len(parts) != 6 {
 		log.Error().Msg("Некорректный формат дат, ожидается ГГГГ-ММ-ДД - ГГГГ-ММ-ДД")

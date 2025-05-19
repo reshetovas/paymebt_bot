@@ -87,3 +87,11 @@
 {"level":"info","service":"payment-service","time":"2025-05-14T22:26:00+03:00","message":"The telegram bot is running"}
 {"level":"info","service":"payment-service","time":"2025-05-14T22:31:00+03:00","message":"The telegram bot is running"}
 {"level":"error","service":"payment-service","time":"2025-05-14T22:32:05+03:00","message":"user 423795271 state not found"}
+{"level":"error","service":"payment-service","time":"2025-05-19T22:57:59+03:00","message":"token not identified"}
+{"level":"error","service":"payment-service","time":"2025-05-19T22:57:59+03:00","message":"token not identified"}
+{"level":"info","service":"payment-service","time":"2025-05-19T23:33:58+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-19T23:35:44+03:00","message":"The telegram bot is running"}
+{"level":"info","service":"payment-service","time":"2025-05-19T23:41:42+03:00","message":"The telegram bot is running"}
+{"level":"debug","service":"payment-service","time":"2025-05-19T23:47:40+03:00","message":"bot: *telebot.Bot, &{Me:0x140000ca1b0 Token:7630156928:AAHOTkuVAklixGdxbEcgxyyy1CiAhxH1Zuc URL:https://api.telegram.org Updates:0x1400014d6c0 Poller:0x14000126210 onError:0x104884a10 group:0x140000a00a0 handlers:map[] synchronous:false verbose:false parseMode: stop:0x1400007e1c0 client:0x1400015e9f0 stopMu:{w:{_:{} mu:{state:0 sema:0}} writerSem:0 readerSem:0 readerCount:{_:{} v:0} readerWait:{_:{} v:0}} stopClient:<nil>}\n"}
+{"level":"info","service":"payment-service","time":"2025-05-19T23:47:40+03:00","message":"The telegram bot is running"}
+{"level":"debug","service":"payment-service","time":"2025-05-19T23:48:40+03:00","message":"from: 2025-05-01 00:00:00 +0000 UTC, to: 2025-05-19 23:59:59 +0000 UTC"}
